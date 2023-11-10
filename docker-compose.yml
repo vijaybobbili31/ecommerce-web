@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "6001:80"
+    depends_on:
+      - db
+    container_name: ecommerce-backend
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: ecommerce
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: vijay123
+      MYSQL_ROOT_PASSWORD: vijay123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-scripts:/docker-entrypoint-initdb.d
+    container_name: ecommerce-database
